@@ -1,0 +1,76 @@
+<div class="container mt-3">
+
+  <div class="row mb-3 d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <h4>Detail Barang</h4>
+          </div>
+          <div class="form-group mb-3">
+            <label>Nomor</label>
+            <input type="text" disabled class="form-control" name="nomor" [(ngModel)]="barang.nomor" />
+          </div>
+          <div class="form-group mb-3">
+            <label>Nama</label>
+            <input 
+              type="text" 
+              required 
+              class="form-control" 
+              name="nama" 
+              [(ngModel)]="barang.nama" 
+              maxlength="100"
+              minlength="20"
+              #nama="ngModel"
+            />
+            <div *ngIf="!nama?.valid && (nama?.dirty || nama?.touched)">
+              Invalid Name
+              <div *ngIf="nama.errors?.['required']">
+                 Name is required
+              </div>
+              <div *ngIf="nama.errors?.['minlength']">
+                Name Minimum Length is {{nama.errors?.['minlength']?.requiredLength}}
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label>Satuan</label>
+            <input type="text" class="form-control" name="satuan" [(ngModel)]="barang.satuan" />
+          </div>
+          <div class="form-group mb-3">
+            <label>Harga Jual</label>
+            <input 
+              type="number"
+              
+              class="form-control" 
+              name="hargaJual" 
+              required
+              [(ngModel)]="barang.hargaJual" 
+              #hargaJual="ngModel"
+              pattern="^\d*[1-9]\d*$"
+              min="10"
+              max="20000000"
+            />
+            <!-- {{ hargaJual }} -->
+            <small 
+              class="text-danger" 
+              *ngIf="!hargaJual?.valid && (hargaJual?.dirty || hargaJual?.touched)"
+            >
+              {{hargaJual.errors | json}}
+              Invalid harga jual
+            </small>
+          </div>
+          <div class="form-group mb-3">
+            <label>Stok</label>
+            <input type="number" class="form-control" name="stok" [(ngModel)]="barang.stok" />
+          </div>
+        </div>
+
+        <div class="card-footer d-flex gap-2">
+          <a routerLink="../" class="btn btn-outline-dark">Batal</a>
+          <button class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

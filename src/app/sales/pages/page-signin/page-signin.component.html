@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row d-flex justify-content-center vh-100 align-items-center">
+    <div class="col-md-4">
+      <div class="card shadow">
+        <img src="/assets/card.png" class="card-img-top">
+        <div class="card-body">
+          <app-message-validator [error]="error" ></app-message-validator>
+          <div class="form-group mb-3">
+            <label>Email</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              name="email" 
+              required
+              email
+              [(ngModel)]="user.email" 
+              #email="ngModel"
+            />
+            <small 
+              class="text-danger" 
+              *ngIf="!email?.valid && (email?.dirty || email?.touched)"
+            >
+              Invalid email addresss
+            </small>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              name="password" 
+              required 
+              [(ngModel)]="user.password"
+              #password="ngModel"
+            />
+            <small 
+              class="text-danger" 
+              *ngIf="!password?.valid && (password?.dirty || password?.touched)"
+            >
+              Invalid password 
+            </small>
+          </div>
+          <div class="form-group mt-3">
+            <div class="d-grid gap-2">
+              <button (click)="onSignIn()" [disabled]="!(password?.valid && email?.valid)" class="btn btn-primary btn-lg">Sign In</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

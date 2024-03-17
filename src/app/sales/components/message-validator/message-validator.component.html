@@ -1,0 +1,7 @@
+<ngb-alert 
+  *ngIf="error.detail" 
+  type="danger"
+  (closed)="error.detail = ''"
+>
+  {{ error.detail }}
+</ngb-alert>
